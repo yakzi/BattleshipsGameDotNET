@@ -16,7 +16,7 @@ namespace BattleshipsGameDotNET.Controllers
             players.Add(p2);
             InsertStartingShips(players);
 
-            while (p1.Score < Consts.MaxScore || p2.Score < Consts.MaxScore)                      //Because score = 18 -> all opponent ships are destroyed
+            while (p1.Score < Consts.MaxScore || p2.Score < Consts.MaxScore)                      
             {
                 Fire(p1, p2);
                 if (p1.Score == Consts.MaxScore) break;
@@ -29,7 +29,7 @@ namespace BattleshipsGameDotNET.Controllers
         {
             var isValid = true;                                                                                         //To know if the ship can be placed or not (because of map size or other ship beeing already in here)
             var lengthX = Board.Max(point => point.X);
-            var lengthY = Board.Max(point => point.Y);                                                                  //These two vars are the same to be honest (10x10 board), but for now with my 'thinking process' it will be easier to make kind of a duplicate
+            var lengthY = Board.Max(point => point.Y);                                                                  
             int startX, startY;                                                                                         //For keeping the ship 'drawing' starting point
             do
             {
@@ -49,8 +49,6 @@ namespace BattleshipsGameDotNET.Controllers
                     {
                         case Direction.Left:
                             var currentLeftPoint = Board.SingleOrDefault(p => p.X == startX - i && p.Y == startY);      //Getting current 'sector' of ship on board
-                                                                                                                        //SingleOrDefault to prevent nullpointer if this 'sector' will be out of the board..
-
                             if (currentLeftPoint is null ||
                                 currentLeftPoint.Field != Field.Empty ||
                                 Board.SingleOrDefault(p => p.X == (currentLeftPoint.X) + 1 && p.Y == currentLeftPoint.Y) is null ||
@@ -122,7 +120,7 @@ namespace BattleshipsGameDotNET.Controllers
                 switch (direction)
                 {
                     case Direction.Left:
-                        var pointLeft = Board.Single(p => p.X == startX - i && p.Y == startY);      //Since the point is valid (checked before) there is no need to use SingleOrDefault
+                        var pointLeft = Board.Single(p => p.X == startX - i && p.Y == startY);      
                         pointLeft.Field = Field.ShipPlaced;
                         break;
                     case Direction.Right:
@@ -175,16 +173,16 @@ namespace BattleshipsGameDotNET.Controllers
         }
         public void Fire(Player shooter, Player target)
         {
-            if (shooter.Score < Consts.MaxScore)                                                                 //score = 18 -> all ships has been shot
+            if (shooter.Score < Consts.MaxScore)                                                                 
             {
                 int x, y;
                 do
                 {
-                    x = new Random().Next(0, 10);                                                   //random shooting points
+                    x = new Random().Next(0, 10);                                                  
                     y = new Random().Next(0, 10);
                 } while (!target.Board.Any(p => p.X == x && p.Y == y && p.Field != Field.Miss && p.Field != Field.ShipHit));      //because 'AI' knows previous shots 
 
-                var aimedPoint = target.Board.First(p => p.X == x && p.Y >= y);                     //actual shooting point
+                var aimedPoint = target.Board.First(p => p.X == x && p.Y >= y);                                                   //actual shooting point
                 if (aimedPoint.Field != Field.ShipHit && aimedPoint.Field != Field.Miss)
                 {
                     if (aimedPoint.Field == Field.ShipPlaced)
