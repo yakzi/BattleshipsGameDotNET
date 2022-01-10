@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .board {
@@ -27,6 +27,9 @@ body {
     padding: 10px;
 }
 
+.dotnet {
+    color: #35858B;
+}
 .empty {
     color: blue;
 }
