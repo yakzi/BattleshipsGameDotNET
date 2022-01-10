@@ -5,6 +5,10 @@ namespace BattleshipsGameDotNET.Controllers
 {
     public class GameController : Controller
     {
+        public Player CreatePlayer()
+        {
+            return new Player();
+        }
         private void CreateBoard(Player player)
         {
             player.Board = new List<Point>();
