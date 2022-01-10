@@ -120,6 +120,19 @@ namespace BattleshipsGameDotNET.Controllers
                 }
             }
         }
+        private void InsertStartingShips(List<Player> players)
+        {
+            foreach (var player in players)
+            {
+                InsertShip(5, (Direction)new Random().Next(0, 4), player.Board);
+                InsertShip(4, (Direction)new Random().Next(0, 4), player.Board);
+                InsertShip(3, (Direction)new Random().Next(0, 4), player.Board);
+                InsertShip(2, (Direction)new Random().Next(0, 4), player.Board);
+                InsertShip(2, (Direction)new Random().Next(0, 4), player.Board);
+                InsertShip(1, (Direction)new Random().Next(0, 4), player.Board);
+                InsertShip(1, (Direction)new Random().Next(0, 4), player.Board);
+            }
+        }
         public Player CreatePlayer()
         {
             return new Player();
