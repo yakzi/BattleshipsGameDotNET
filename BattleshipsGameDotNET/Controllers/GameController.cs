@@ -5,6 +5,26 @@ namespace BattleshipsGameDotNET.Controllers
 {
     public class GameController : Controller
     {
+        public IActionResult Play()
+        {
+            List<Player> players = new List<Player>();
+            var p1 = CreatePlayer();
+            var p2 = CreatePlayer();
+            CreateBoard(p1);
+            CreateBoard(p2);
+            players.Add(p1);
+            players.Add(p2);
+            InsertStartingShips(players);
+
+            while (p1.Score < Consts.MaxScore || p2.Score < Consts.MaxScore)                      //Because score = 18 -> all opponent ships are destroyed
+            {
+                Fire(p1, p2);
+                if (p1.Score == Consts.MaxScore) break;
+                Fire(p2, p1);
+                if (p2.Score == Consts.MaxScore) break;
+            }
+            return View((p1, p2));
+        }
         private void InsertShip(int shipLength, Direction direction, List<Point> Board)
         {
             var isValid = true;                                                                                         //To know if the ship can be placed or not (because of map size or other ship beeing already in here)
