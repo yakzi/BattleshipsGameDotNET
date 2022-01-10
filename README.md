@@ -1,5 +1,5 @@
 <h1 align="center">
- <img src="./anypostlogo.png" alt="BattleshipsGameDotNET"/>
+ BattleshipsGameDotNET
 </h1>
 
 ## Table of contents
