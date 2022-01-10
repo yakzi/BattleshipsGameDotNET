@@ -1,0 +1,85 @@
+﻿@model (Player p1, Player p2)
+
+@{
+    ViewData["Title"] = "Home Page";
+    var p1score = Model.p2.Score;
+    var p2score = Model.p1.Score;
+}
+
+
+@{
+if(p1score > p2score)
+{
+   @: <h1>Player 1 won with score @p1score!</h1>  <h3>Player 2 score: @p2score</h3>
+}
+if(p2score > p1score)
+{
+   @: <h1>Player 2 won with score @p2score!</h1>  <h3>Player 1 score: @p1score</h3>
+}
+if(p2score == p1score)
+{
+   @: <h1>Draw with both sides score: @p1score</h1> 
+}
+}
+
+Board Legend: <br />
+<span class = "empty"> 0 </span> - Nothing was placed there, and no one has hit that point (Empty point)<br />
+<span class = "hit"> X </span> - Ship hit by opponent (Ship Hit)<br />
+<span class = "miss"> * </span> - Shot fired, but nothing was placed there (Missed)<br />
+<span class = "ship"> C </span> - Unhit part of the ship (Ship Placed)
+
+<div class='parent'>
+    <div class='child'>
+        <h4>Player 1 Board (at which P2 aimed)</h4>
+<div class="board">
+@foreach (var col in  Model.p2.Board.OrderBy(point => point.X))
+{
+
+        <div>
+            @switch (col.Field)
+                {
+                    case (Field.Empty):
+                        @: <span class = "empty"> 0 </span>
+                        break;
+                    case (Field.ShipHit):
+                        @: <span class = "hit"> X </span>
+                        break;
+                    case (Field.Miss):
+                        @: <span class = "miss"> * </span>
+                        break;
+                    case (Field.ShipPlaced):
+                        @: <span class = "ship"> C </span>
+                        break;
+                }
+        </div>
+    
+}
+</div>
+</div>
+<div class='child'>
+<h4>Player 2 Board (at which P1 aimed)</h4>
+<div class="board">
+@foreach (var col in  Model.p1.Board.OrderBy(point => point.X))
+{
+
+        <div>
+            @switch (col.Field)
+                {
+                    case (Field.Empty):
+                        @: <span class = "empty"> 0 </span>
+                        break;
+                    case (Field.ShipHit):
+                        @: <span class = "hit"> X </span>
+                        break;
+                    case (Field.Miss):
+                        @: <span class = "miss"> * </span>
+                        break;
+                    case (Field.ShipPlaced):
+                        @: <span class = "ship"> C </span>
+                        break;
+                }
+        </div>
+    
+}</div>
+</div>
+</div>
