@@ -13,6 +13,7 @@ Web application, which simulates battleships game between two AI players
 
 ## Features
 * Watch which AI won the game :)
+* Currently having only one endpoint, working on WebAPI version with multiple endpoints and ability to see every AI move
 
 ## Technologies
 * ASP.NET Core
