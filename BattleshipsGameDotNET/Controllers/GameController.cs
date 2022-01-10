@@ -153,5 +153,33 @@ namespace BattleshipsGameDotNET.Controllers
                 }
             }
         }
+        public void Fire(Player shooter, Player target)
+        {
+            if (shooter.Score < Consts.MaxScore)                                                                 //score = 18 -> all ships has been shot
+            {
+                int x, y;
+                do
+                {
+                    x = new Random().Next(0, 10);                                                   //random shooting points
+                    y = new Random().Next(0, 10);
+                } while (!target.Board.Any(p => p.X == x && p.Y == y && p.Field != Field.Miss && p.Field != Field.ShipHit));      //because 'AI' knows previous shots 
+
+                var aimedPoint = target.Board.First(p => p.X == x && p.Y >= y);                     //actual shooting point
+                if (aimedPoint.Field != Field.ShipHit && aimedPoint.Field != Field.Miss)
+                {
+                    if (aimedPoint.Field == Field.ShipPlaced)
+                    {
+                        aimedPoint.Field = Field.ShipHit;
+                        shooter.Hits.Add(aimedPoint);
+                        shooter.Score++;
+                    }
+                    else
+                    {
+                        aimedPoint.Field = Field.Miss;
+                        shooter.Hits.Add(aimedPoint);
+                    }
+                }
+            }
+        }
     }
 }
