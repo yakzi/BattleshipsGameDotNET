@@ -16,3 +16,40 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 32px 32px;
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+}
+
+.empty {
+    color: blue;
+}
+
+.hit {
+    color: red;
+}
+
+.miss {
+    color: darkgreen;
+}
+
+.ship {
+    color: black;
+}
+
+.parent {
+    text-align: center;
+}
+
+.child {
+    margin: 20px;
+    display: inline-block;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+}
